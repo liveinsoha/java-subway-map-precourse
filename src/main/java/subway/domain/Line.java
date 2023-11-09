@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
-    private static final LineRepository instance = LineRepository.getInstance();
+    private static final LineRepository lineRepository = LineRepository.getInstance();
 
     private String name;
     private Station upperEndStation;
@@ -36,7 +36,13 @@ public class Line {
         stations.addAll(otherStations);
     }
 
-    public void decreaseInLineCountForStations(){
+    public static Line of(String name) {
+        return lineRepository.getLines().stream().filter(line -> line.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당 노선은 존재하지 않습니다"));
+    }
+
+    public void decreaseInLineCountForStations() {
         stations.forEach(Station::decreaseInLineCount);
     }
 
@@ -50,5 +56,14 @@ public class Line {
         return name;
     }
 
-    // 추가 기능 구현
+    public void addStation(Station station, int index) {
+        validateIndex(index);
+        stations.add(index, station);
+    }
+
+    private void validateIndex(int index) {
+        if (index <= 0 || index >= (stations.size() - 1)) {
+            throw new IllegalArgumentException("[ERROR]역과 역 사이에만 추가할 수 있습니다");
+        }
+    }
 }
