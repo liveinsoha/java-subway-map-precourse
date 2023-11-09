@@ -16,7 +16,7 @@ public class Station {
     public static Station of(String name){
         return stationRepository.getStations().stream().filter(station -> station.getName().equals(name))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() ->new IllegalArgumentException("[ERROR] 해당역은 존재하지 않습니다"));
     }
 
     public String getName() {

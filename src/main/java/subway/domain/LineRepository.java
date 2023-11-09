@@ -29,6 +29,12 @@ public class LineRepository {
         lines.add(line);
     }
 
+    public void validateDuplicate(String newLineName) {
+        if(lines.stream().anyMatch(line -> line.getName().equals(newLineName))){
+            throw new IllegalArgumentException("[ERROR] 이미 존재하는 노선입니다");
+        }
+    }
+
     public boolean deleteLineByName(String name) {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
     }
