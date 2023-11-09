@@ -103,4 +103,8 @@ public class Line {
             upperEndStation = stations.get(stations.indexOf(upperEndStation) + 1);
         }
     }
+
+    public List<Station> getStations() {
+        return stations;
+    }
 }

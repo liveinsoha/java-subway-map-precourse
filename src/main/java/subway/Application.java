@@ -1,14 +1,13 @@
 package subway;
 
-import subway.controller.CourseController;
-import subway.controller.LineController;
-import subway.controller.StationController;
 
-import java.util.Scanner;
+import subway.controller.MainController;
+
+
 
 public class Application {
     public static void main(String[] args) {
-        CourseController controller = new CourseController();
-        controller.run();
+        MainController mainController = new MainController();
+        mainController.run();
     }
 }

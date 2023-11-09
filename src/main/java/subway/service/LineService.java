@@ -25,7 +25,7 @@ public class LineService {
     }
 
     public LineDtos getLineDtos() {
-        return LineDtos.of(lineRepository);
+        return LineDtos.of(lineRepository.getLines());
     }
 
 

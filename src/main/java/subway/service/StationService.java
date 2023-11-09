@@ -20,7 +20,7 @@ public class StationService {
     }
 
     public StationDtos getStationsDto() {
-        return StationDtos.of(stationRepository);
+        return StationDtos.of(stationRepository.getStations());
     }
 
 }

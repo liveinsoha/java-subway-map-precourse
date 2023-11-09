@@ -1,5 +1,6 @@
 package subway.dto;
 
+import subway.domain.Line;
 import subway.domain.LineRepository;
 
 import java.util.ArrayList;
@@ -10,12 +11,12 @@ public class LineDtos {
 
     List<LineDto> lineDtos;
 
-    private LineDtos(LineRepository lineRepository) {
-        lineDtos = lineRepository.getLines().stream().map(LineDto::of).collect(Collectors.toList());
+    private LineDtos(List<Line> lines) {
+        lineDtos = lines.stream().map(LineDto::of).collect(Collectors.toList());
     }
 
-    public static LineDtos of(LineRepository lineRepository) {
-        return new LineDtos(lineRepository);
+    public static LineDtos of(List<Line> lines) {
+        return new LineDtos(lines);
     }
 
     public List<LineDto> getLineDtos() {
