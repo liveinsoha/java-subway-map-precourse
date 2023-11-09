@@ -5,6 +5,7 @@ import subway.service.LineService;
 import subway.view.ErrorOutputView;
 import subway.view.inputView.LineInputView;
 import subway.view.inputView.StationInputView;
+import subway.view.outputView.LineOutputView;
 
 import java.util.Arrays;
 
@@ -19,9 +20,9 @@ public class LineController {
             if (userInput.equals("1")) {
                 addLine();
             } else if (userInput.equals("2")) {
-
+                deleteLine();
             } else if (userInput.equals("3")) {
-
+                showLines();
             } else if (userInput.equalsIgnoreCase("b")) {
                 break;
             }
@@ -63,5 +64,17 @@ public class LineController {
 
     private Station getBelowEndStation() {
         return Station.of(LineInputView.getBelowEndStationName());
+    }
+
+    private void deleteLine() {
+        try {
+            lineService.deleteLine(LineInputView.getDeleteLineNameInput());
+        } catch (IllegalArgumentException e) {
+            ErrorOutputView.printErrorMessage(e.getMessage());
+        }
+    }
+
+    private void showLines() {
+        LineOutputView.printLinesInfo(lineService.getLineDtos());
     }
 }

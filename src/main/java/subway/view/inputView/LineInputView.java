@@ -20,6 +20,11 @@ public class LineInputView {
         return scanner.nextLine().trim();
     }
 
+    public static String getDeleteLineNameInput() {
+        System.out.println("## 삭제할 노선 이름을 입력하세요.");
+        return scanner.nextLine().trim();
+    }
+
     public static String getUpperEndStationName() {
         System.out.println("## 등록할 노선의 상행 종점역 이름을 입력하세요.");
         return scanner.nextLine();

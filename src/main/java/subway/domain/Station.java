@@ -13,11 +13,12 @@ public class Station {
         this.name = name;
     }
 
-    public static Station of(String name){
+    public static Station of(String name) {
         return stationRepository.getStations().stream().filter(station -> station.getName().equals(name))
                 .findFirst()
-                .orElseThrow(() ->new IllegalArgumentException("[ERROR] 해당역은 존재하지 않습니다"));
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당역은 존재하지 않습니다"));
     }
+
 
     public String getName() {
         return name;
@@ -31,6 +32,10 @@ public class Station {
 
     public void increaseInLineCount() {
         inLineCount++;
+    }
+
+    public void decreaseInLineCount() {
+        inLineCount--;
     }
 
     public int getInLineCount() {
