@@ -2,6 +2,8 @@ package subway.service;
 
 import subway.domain.Station;
 import subway.domain.StationRepository;
+import subway.dto.StationDtos;
+
 
 public class StationService {
 
@@ -14,6 +16,10 @@ public class StationService {
 
     public void deleteStation(String stationName){
         stationRepository.deleteStation(stationName);
+    }
+
+    public StationDtos getStationsDto(){
+        return StationDtos.of(stationRepository);
     }
 
 }

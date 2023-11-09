@@ -18,11 +18,11 @@ public class StationController {
             String userInput = getUserChoice();
 
             if (userInput.equals("1")) {
-                getStationName();
+                addStation();
             } else if (userInput.equals("2")) {
-
+                deleteStation();
             } else if (userInput.equals("3")) {
-
+                showStations();
             } else if (userInput.equalsIgnoreCase("b")) {
                 break;
             }
@@ -31,7 +31,6 @@ public class StationController {
 
     private String getUserChoice() {
         try {
-            StationOutputView.printStationScreen();
             return validateUserChoiceInput(StationInputView.getUserChoiceNumber());
         } catch (IllegalArgumentException e) {
             ErrorOutputView.printErrorMessage(e.getMessage());
@@ -46,12 +45,24 @@ public class StationController {
         return input;
     }
 
-    private void getStationName() {
+    private void addStation() {
         try {
-            stationService.addStation(StationInputView.getStationNameInput());
+            stationService.addStation(StationInputView.getAddStationNameInput());
         } catch (IllegalArgumentException e) {
             ErrorOutputView.printErrorMessage(e.getMessage());
         }
+    }
+
+    private void deleteStation() {
+        try {
+            stationService.deleteStation(StationInputView.getDeleteStationNameInput());
+        } catch (IllegalArgumentException e) {
+            ErrorOutputView.printErrorMessage(e.getMessage());
+        }
+    }
+
+    private void showStations(){
+        StationOutputView.printStationInfo(stationService.getStationsDto());
     }
 }
 
