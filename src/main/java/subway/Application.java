@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-
         CourseController controller = new CourseController();
         controller.run();
     }

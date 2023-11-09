@@ -27,4 +27,14 @@ public class CourseInputView {
         System.out.println("## 순서를 입력하세요.");
         return scanner.nextLine().trim();
     }
+
+    public static String getDeleteCourseLineName(){
+        System.out.println("## 삭제할 구간의 노선을 입력하세요.");
+        return scanner.nextLine().trim();
+    }
+
+    public static String getDeleteCourseStationName(){
+        System.out.println("## 삭제할 구간의 역을 입력하세요.");
+        return scanner.nextLine().trim();
+    }
 }

@@ -20,7 +20,7 @@ public class CourseController {
             if (userInput.equals("1")) {
                 addCourse();
             } else if (userInput.equals("2")) {
-
+                deleteCourse();
             } else if (userInput.equalsIgnoreCase("b")) {
                 break;
             }
@@ -45,7 +45,18 @@ public class CourseController {
 
     private void addCourse() {
         try {
-            courseService.addCourse(getAddCourseLine(), getAddCourseStation(), getAddCourseIndex());
+            Line line = getAddCourseLine();
+            Station station = getAddCourseStation();
+            courseService.validateNotContain(line, station);
+            courseService.addCourse(line, station, getAddCourseIndex());
+        } catch (IllegalArgumentException e) {
+            ErrorOutputView.printErrorMessage(e.getMessage());
+        }
+    }
+
+    private void deleteCourse() {
+        try {
+            courseService.deleteCourse(getDeleteCourseLine(), getDeleteCourseStation());
         } catch (IllegalArgumentException e) {
             ErrorOutputView.printErrorMessage(e.getMessage());
         }
@@ -64,5 +75,16 @@ public class CourseController {
     private int getAddCourseIndex() {
         return Parser.parseToInt(CourseInputView.getAddCourseIndex());
     }
+
+    private Line getDeleteCourseLine() {
+        return Line.of(CourseInputView.getDeleteCourseLineName());
+    }
+
+    private Station getDeleteCourseStation() {
+        return Station.of(CourseInputView.getDeleteCourseStationName());
+
+    }
+
+
 }
 

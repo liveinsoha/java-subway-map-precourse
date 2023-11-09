@@ -13,5 +13,12 @@ public class CourseService {
         line.addStation(station, index);
     }
 
+    public void deleteCourse(Line line, Station station) {
+        line.deleteStation(station);
+    }
+
+    public void validateNotContain(Line line, Station station) {
+        line.validateNotContain(station);
+    }
 
 }

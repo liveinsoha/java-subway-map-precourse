@@ -66,4 +66,41 @@ public class Line {
             throw new IllegalArgumentException("[ERROR]역과 역 사이에만 추가할 수 있습니다");
         }
     }
+
+    public void deleteStation(Station station) {
+        validate(station);
+        stations.remove(station);
+    }
+
+    private void validate(Station station) {
+        validateContain(station);
+        validateOverTwoStations();
+        ifEndStation(station);
+    }
+
+    private void validateContain(Station station) {
+        if (!stations.contains(station)) {
+            throw new IllegalArgumentException("[ERROR] 해당 노선에 역이 존재하지 않습니다");
+        }
+    }
+
+    public void validateNotContain(Station station) {
+        if (stations.contains(station)) {
+            throw new IllegalArgumentException("[ERROR] 노선에 이미 해당 역이 존재합니다");
+        }
+    }
+
+    private void validateOverTwoStations() {
+        if (stations.size() <= 2) {
+            throw new IllegalArgumentException("[ERROR] 노선에 역이 2개 이하입니다");
+        }
+    }
+
+    private void ifEndStation(Station station) {
+        if (station.equals(belowEndStation)) {
+            belowEndStation = stations.get(stations.indexOf(belowEndStation) - 1);
+        } else if (station.equals(upperEndStation)) {
+            upperEndStation = stations.get(stations.indexOf(upperEndStation) + 1);
+        }
+    }
 }
