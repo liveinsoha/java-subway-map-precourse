@@ -3,12 +3,20 @@ package subway.domain;
 import java.util.Objects;
 
 public class Station {
+    private static final StationRepository stationRepository = StationRepository.getInstance();
+
     private final String name;
     private int inLineCount = 0;
 
     public Station(String name) {
         validateNameLength(name);
         this.name = name;
+    }
+
+    public static Station of(String name){
+        return stationRepository.getStations().stream().filter(station -> station.getName().equals(name))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public String getName() {

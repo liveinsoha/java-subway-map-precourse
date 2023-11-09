@@ -1,22 +1,35 @@
 package subway.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LineRepository {
+    private static final LineRepository instance = new LineRepository();
     private static final List<Line> lines = new ArrayList<>();
 
-    public static List<Line> lines() {
+    private LineRepository() {
+    }
+
+    public static LineRepository getInstance() {
+        return instance;
+    }
+
+    static {
+        List<Line> initLines = Arrays.asList(
+                new Line("2호선", Station.of("교대역"), Station.of("역삼역")),
+                new Line("3호선", Station.of("교대역"), Station.of("매봉역")),
+                new Line("신분당선", Station.of("강남역"), Station.of("양재시민의숲역")));
+        lines.addAll(initLines);
+    }
+
+    public List<Line> getLines() {
         return Collections.unmodifiableList(lines);
     }
 
-    public static void addLine(Line line) {
+    public void addLine(Line line) {
         lines.add(line);
     }
 
-    public static boolean deleteLineByName(String name) {
+    public boolean deleteLineByName(String name) {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
     }
 }

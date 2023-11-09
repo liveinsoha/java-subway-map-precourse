@@ -9,6 +9,8 @@ public class Line {
     public Line(String name, Station upperEndStation, Station belowEndStation) {
         this.name = name;
         validateLineNameLength(name);
+        upperEndStation.increaseInLineCount();
+        belowEndStation.increaseInLineCount();
         this.upperEndStation = upperEndStation;
         this.belowEndStation = belowEndStation;
     }
