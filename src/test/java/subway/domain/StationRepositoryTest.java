@@ -33,4 +33,10 @@ class StationRepositoryTest {
 
     }
 
+    @Test
+    void addTest(){
+        stationRepository.addStation(new Station("철산역"));
+        assertThat(stationRepository.getStations().size()).isEqualTo(8);
+    }
+
 }
