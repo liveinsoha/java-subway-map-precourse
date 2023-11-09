@@ -38,7 +38,26 @@ public class StationRepository {
         }
     }
 
-    public boolean deleteStation(String name) {
-        return stations.removeIf(station -> Objects.equals(station.getName(), name));
+    public void deleteStation(String name) {
+        validateForDelete(name);
+        stations.removeIf(station -> Objects.equals(station.getName(), name));
+    }
+
+    private void validateForDelete(String name){
+        validateExist(name);
+        validateInLine(name);
+
+    }
+
+    private void validateInLine(String name) {
+        if (Station.of(name).getInLineCount() != 0) {
+            throw new IllegalArgumentException("[ERROR] 해당 역은 노선에 등록되어 있습니다");
+        }
+    }
+
+    private void validateExist(String name) {
+        if (stations.stream().noneMatch(station -> station.getName().equals(name))){
+            throw new IllegalArgumentException("[ERROR] 해당 역은 존재하지 않습니다");
+        }
     }
 }
